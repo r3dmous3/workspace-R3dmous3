@@ -160,6 +160,8 @@ cpdefine("inline:com-chilipeppr-workspace-r3dmous3", ["chilipeppr_ready"], funct
                 setTimeout(function() { $(window).trigger('resize'); }, 100);
             });
             
+            this.load3dviewerWidget();
+            
             this.loadTemplateWidget();
             
             // Create our workspace upper right corner triangle menu
@@ -260,6 +262,30 @@ cpdefine("inline:com-chilipeppr-workspace-r3dmous3", ["chilipeppr_ready"], funct
 
                     });
                 }
+            );
+        },
+        /**
+         * Load the 3D Viewer Server widget via chilipeppr.load()
+         */
+        load3dviewerWidget: function(callback) {
+
+            var that = this;
+
+            chilipeppr.load(
+              "#com-chilipeppr-widget-3dviewer-instance",
+              "http://raw.githubusercontent.com/chilipeppr/widget-3dviewer/master/auto-generated-widget.html",
+              function() {
+                // Callback after widget loaded into #myDivWidget3dviewer
+                // Now use require.js to get reference to instantiated widget
+                cprequire(
+                  ["inline:com-chilipeppr-widget-3dviewer"], // the id you gave your widget
+                  function(myObjWidget3dviewer) {
+                    // Callback that is passed reference to the newly loaded widget
+                    console.log("Widget / 3D GCode Viewer just got loaded.", myObjWidget3dviewer);
+                    myObjWidget3dviewer.init();
+                  }
+                );
+              }
             );
         },
         /**
@@ -380,8 +406,8 @@ cpdefine("inline:com-chilipeppr-workspace-r3dmous3", ["chilipeppr_ready"], funct
 
                 <!-- Center Column -->
                 <div class="col-md-5 col-pad10">
-                    <div id="mywidget2-instance">
-                        <p class="sample" style="min-height:200px;">Widget 2 goes here</p>
+                    <div id="com-chilipeppr-widget-3dviewer-instance">
+                        <p class="sample" style="min-height:200px;">3D Viewer</p>
                     </div>
                 </div>
 
