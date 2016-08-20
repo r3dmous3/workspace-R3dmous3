@@ -70,7 +70,6 @@ cpdefine("inline:com-chilipeppr-workspace-r3dmous3", ["chilipeppr_ready"], funct
             
             this.load3dviewerWidget();
             
-            this.loadTemplateWidget();
             
             // Create our workspace upper right corner triangle menu
             this.loadWorkspaceMenu();
